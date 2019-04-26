@@ -6,14 +6,14 @@ RUN apt-get update \
  && npm install -g lighthouse \
  && rm -rf /var/lib/apt/lists/*
 
-
 ENV USER lighthouse
 ENV HOME /home/$USER
 
 RUN useradd -ms /bin/bash -U $USER \
  && passwd -d $USER \
  && mkdir -p $HOME/result \
- && chown lighthouse:lighthouse $HOME/result
+ && chown -R lighthouse:lighthouse $HOME \
+ && adduser lighthouse sudo
 
 USER $USER
 WORKDIR $HOME/result
@@ -25,4 +25,3 @@ COPY --chown=lighthouse:lighthouse start.sh $HOME/start.sh
 RUN chmod a+x $HOME/start.sh
 
 ENTRYPOINT ["../start.sh"]
-#CMD $HOME/start.sh

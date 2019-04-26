@@ -2,4 +2,6 @@
 google-chrome --version
 firefox --version
 echo "Lighthouse" $(lighthouse --version)
-/usr/bin/xvfb-run -a lighthouse "$@"
+echo "Running as:" $(whoami)
+
+sudo /usr/bin/xvfb-run -a lighthouse "$@"
